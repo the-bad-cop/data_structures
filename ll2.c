@@ -7,7 +7,7 @@ typedef struct Node1
 } Node;
 Node *header, *ptr, *new;
 void addNode(int);
-void sortCheck(Node *);
+void sortCheck();
 void swapNode(Node *, Node *);
 void printNode();
 void main()
@@ -28,6 +28,10 @@ void main()
         addNode(it);
     }
     printf("Printing the elements\n");
+    printNode();
+    printf("Sortng the elements\n");
+    sortCheck();
+    printf("Printing sorted elements\n");
     printNode();
 }
 
@@ -50,7 +54,38 @@ void printNode()
     ptr = header->link;
     while (ptr != NULL)
     {
-        printf("%d", ptr->data);
+        printf("%d\n", ptr->data);
         ptr = ptr->link;
     }
+}
+
+void sortCheck()
+{
+    Node *ptr1;
+    ptr = header->link;
+
+    while (ptr != NULL)
+    {
+        // ptr = ptr->link;
+
+        ptr1 = ptr->link;
+        while (ptr1 != NULL)
+        {
+            // ptr1 = ptr->link;
+            if (ptr->data > ptr1->data)
+            {
+                swapNode(ptr, ptr1);
+            }
+            ptr1 = ptr1->link;
+        }
+        ptr = ptr->link;
+    }
+}
+
+void swapNode(Node *node1, Node *node2)
+{
+    int temp;
+    temp = node1->data;
+    node1->data = node2->data;
+    node2->data = temp;
 }
